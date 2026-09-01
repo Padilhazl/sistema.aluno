@@ -1,0 +1,45 @@
+class Produto:
+    def __init__(self, id_prod, nome, preco, estoque):
+        self.id = id_prod
+        self.nome = nome
+        self.preco = preco
+        self.estoque = estoque
+
+    def exibir_detalhes(self):
+        status = f"{self.estoque} unidades" if self.estoque > 0 else "FORA DE ESTOQUE"
+        print(f"[{self.id}] {self.nome:<20} | Preço: R$ {self.preco:>7.2f} | Estoque: {status}")
+
+class Loja:
+    def __init__(self):
+        self.inventario = []
+
+    def adicionar_produto(self, produto):
+        self.inventario.append(produto)
+
+    def listar_produtos(self):
+        print("\n--- CATÁLOGO DA LOJA ---")
+        for prod in self.inventario:
+            prod.exibir_detalhes()
+
+    def realizar_venda(self, id_prod, quantidade):
+        for prod in self.inventario:
+            if prod.id == id_prod:
+                if prod.estoque >= quantidade:
+                    prod.estoque -= quantidade
+                    total = prod.preco * quantidade
+                    print(f"\nVenda realizada: {quantidade}x {prod.nome} | Total: R$ {total:.2f}")
+                    return
+                else:
+                    print(f"\nEstoque insuficiente para {prod.nome}. Disponível: {prod.estoque}")
+                    return
+        print("\nProduto não encontrado.")
+
+# Execução do sistema
+minha_loja = Loja()
+minha_loja.adicionar_produto(Produto(1, "Camiseta Básica", 49.90, 15))
+minha_loja.adicionar_produto(Produto(2, "Tênis Esportivo", 199.99, 8))
+minha_loja.adicionar_produto(Produto(3, "Mochila Escolar", 89.90, 0))
+
+minha_loja.listar_produtos()
+minha_loja.realizar_venda(1, 2)
+minha_loja.listar_produtos()

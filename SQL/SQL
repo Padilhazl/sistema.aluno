@@ -1,0 +1,14 @@
+CREATE TABLE produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    preco DECIMAL(10, 2) NOT NULL,
+    quantidade_estoque INT NOT NULL DEFAULT 0,
+    categoria VARCHAR(50),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO produtos (nome, descricao, preco, quantidade_estoque, categoria) VALUES
+('Camiseta Básica', 'Camiseta 100% algodão', 49.90, 15, 'Vestuário'),
+('Tênis Esportivo', 'Tênis para corrida leve', 199.99, 8, 'Calçados'),
+('Mochila Escolar', 'Mochila resistente à água', 89.90, 0, 'Acessórios');
